@@ -1,5 +1,14 @@
 # Anaaya Plus (عناية بلس)
 
+<p align="center">
+  <img src="assets/flutter-logo.svg" alt="Flutter logo" width="72" />
+</p>
+
+<p align="center">
+  <strong>Automotive Service Booking Platform</strong><br>
+  Flutter / Dart • Firebase • Supabase • Arabic RTL + English LTR
+</p>
+
 [![Flutter](https://img.shields.io/badge/Flutter-Dart-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-Backend-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-Edge%20Functions-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
