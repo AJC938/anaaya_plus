@@ -1,0 +1,1007 @@
+{
+  "@@locale": "ar",
+  "appTitle": "عناية بلس",
+  "@appTitle": {
+    "description": "The application name shown in the OS and app bar."
+  },
+  "navHome": "الرئيسية",
+  "@navHome": {
+    "description": "Bottom navigation label for the Home tab."
+  },
+  "navBookings": "الحجوزات",
+  "@navBookings": {
+    "description": "Bottom navigation label for the Bookings tab."
+  },
+  "navCars": "سياراتي",
+  "@navCars": {
+    "description": "Bottom navigation label for the Cars tab."
+  },
+  "navProfile": "حسابي",
+  "@navProfile": {
+    "description": "Bottom navigation label for the Profile tab."
+  },
+
+  "homeGreeting": "مرحباً، {name}",
+  "@homeGreeting": {
+    "description": "Home header greeting with the user's name.",
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "notifications": "الإشعارات",
+  "@notifications": {
+    "description": "Tooltip/label for the notifications bell icon on Home."
+  },
+
+  "sectionServices": "الخدمات",
+  "@sectionServices": {
+    "description": "Home services section header."
+  },
+  "sectionOffers": "العروض",
+  "@sectionOffers": {
+    "description": "Home offers section header."
+  },
+  "viewAll": "عرض الكل",
+  "@viewAll": {
+    "description": "Action to view the full list behind a Home section."
+  },
+
+  "discoveryTitle": "ما الذي تحتاجه سيارتك؟",
+  "@discoveryTitle": {
+    "description": "Guided service-discovery banner title on Home."
+  },
+  "discoverySubtitle": "أخبرنا واحصل على التوصية المناسبة",
+  "@discoverySubtitle": {
+    "description": "Guided service-discovery banner subtitle on Home."
+  },
+  "discoveryCta": "ابدأ الآن",
+  "@discoveryCta": {
+    "description": "Call to action on the guided service-discovery banner."
+  },
+
+  "quickAccessCarsTitle": "سياراتي",
+  "@quickAccessCarsTitle": {
+    "description": "Title of the My Cars quick-access card on Home."
+  },
+  "quickAccessCarsSubtitle": "إدارة سياراتك",
+  "@quickAccessCarsSubtitle": {
+    "description": "Subtitle of the My Cars quick-access card on Home."
+  },
+  "quickAccessBookingsTitle": "حجوزاتي",
+  "@quickAccessBookingsTitle": {
+    "description": "Title of the My Bookings quick-access card on Home."
+  },
+  "quickAccessBookingsSubtitle": "عرض حجوزاتك",
+  "@quickAccessBookingsSubtitle": {
+    "description": "Subtitle of the My Bookings quick-access card on Home."
+  },
+
+  "addVehiclePrompt": "أضف سيارتك للحصول على خدمات مخصصة.",
+  "@addVehiclePrompt": {
+    "description": "Prompt shown on Home when the user has no vehicles yet."
+  },
+  "addVehicleCta": "إضافة سيارة",
+  "@addVehicleCta": {
+    "description": "Call to action that navigates to the Cars tab to add a vehicle."
+  },
+
+  "startingFromPrice": "يبدأ من {amount} ر.س",
+  "@startingFromPrice": {
+    "description": "Starting price shown on a service card.",
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "priceSar": "{amount} ر.س",
+  "@priceSar": {
+    "description": "A plain SAR-formatted price.",
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+
+  "trackServiceCta": "تتبع الخدمة",
+  "@trackServiceCta": {
+    "description": "Call to action on the active booking card."
+  },
+  "upcomingServiceTitle": "الخدمة القادمة",
+  "@upcomingServiceTitle": {
+    "description": "Title shown when the user has an upcoming, not-yet-started booking."
+  },
+  "startsInLabel": "تبدأ خدمتك خلال {duration}",
+  "@startsInLabel": {
+    "description": "Countdown sentence until a scheduled booking starts.",
+    "placeholders": {
+      "duration": {"type": "String"}
+    }
+  },
+  "startingNow": "تبدأ الآن",
+  "@startingNow": {
+    "description": "Shown instead of the countdown once it reaches zero."
+  },
+  "technicianOnTheWayTitle": "الفني في الطريق",
+  "@technicianOnTheWayTitle": {
+    "description": "Title shown while the technician is en route."
+  },
+  "etaLabel": "يصل خلال {duration} تقريبًا",
+  "@etaLabel": {
+    "description": "Technician ETA sentence.",
+    "placeholders": {
+      "duration": {"type": "String"}
+    }
+  },
+  "technicianArrivedLabel": "وصل الفني",
+  "@technicianArrivedLabel": {
+    "description": "Shown instead of the ETA once it reaches zero."
+  },
+  "serviceInProgressTitle": "الخدمة قيد التنفيذ",
+  "@serviceInProgressTitle": {
+    "description": "Title shown while the service is actively being performed."
+  },
+  "serviceCompletedTitle": "اكتملت الخدمة",
+  "@serviceCompletedTitle": {
+    "description": "Title shown for a just-completed booking."
+  },
+
+  "sectionErrorMessage": "تعذر تحميل هذا القسم.",
+  "@sectionErrorMessage": {
+    "description": "Generic message shown when a Home section fails to load."
+  },
+  "retry": "إعادة المحاولة",
+  "@retry": {
+    "description": "Retry action on a failed section."
+  },
+  "comingSoon": "قريبًا",
+  "@comingSoon": {
+    "description": "Feedback for actions that don't have a destination feature yet."
+  },
+
+  "servicesEmptyMessage": "لا توجد خدمات متاحة حاليًا.",
+  "@servicesEmptyMessage": {
+    "description": "Empty state on the Services list when no services are returned."
+  },
+  "durationMinutesLabel": "{minutes} دقيقة",
+  "@durationMinutesLabel": {
+    "description": "A duration expressed in minutes.",
+    "placeholders": {
+      "minutes": {"type": "String"}
+    }
+  },
+  "estimatedDurationLabel": "المدة التقريبية: {duration}",
+  "@estimatedDurationLabel": {
+    "description": "Estimated duration row on Service Details, wrapping an already-formatted duration string.",
+    "placeholders": {
+      "duration": {"type": "String"}
+    }
+  },
+  "includedTitle": "ماذا تشمل الخدمة؟",
+  "@includedTitle": {
+    "description": "Header for the included-items list on Service Details."
+  },
+
+  "selectVehicleAction": "اختر سيارتك",
+  "@selectVehicleAction": {
+    "description": "Vehicle selector section header, and the primary CTA label while no vehicle is selected."
+  },
+  "addVehicleToContinuePrompt": "أضف سيارتك للمتابعة",
+  "@addVehicleToContinuePrompt": {
+    "description": "Prompt shown on Service Details when the user has no vehicles at all."
+  },
+  "compatibleOptionsTitle": "الخيارات المتوافقة",
+  "@compatibleOptionsTitle": {
+    "description": "Header for the product/option list once a vehicle is selected."
+  },
+  "noCompatibleOptionsMessage": "لا توجد خيارات متوافقة",
+  "@noCompatibleOptionsMessage": {
+    "description": "Shown when the selected vehicle has no compatible options for this service."
+  },
+  "selectOptionLabel": "اختر",
+  "@selectOptionLabel": {
+    "description": "Button label on an unselected product option card."
+  },
+  "selectedLabel": "تم الاختيار",
+  "@selectedLabel": {
+    "description": "Shown on a product option card once it is selected."
+  },
+  "selectOptionAction": "اختر خيارًا",
+  "@selectOptionAction": {
+    "description": "Primary CTA label while a vehicle is selected but a required option is not."
+  },
+
+  "priceSummaryBaseLabel": "الخدمة الأساسية",
+  "@priceSummaryBaseLabel": {
+    "description": "Base price row label in the Service Details price summary."
+  },
+  "priceSummaryTotalLabel": "الإجمالي",
+  "@priceSummaryTotalLabel": {
+    "description": "Total price row label in the Service Details price summary."
+  },
+
+  "bookThisServiceCta": "احجز هذه الخدمة",
+  "@bookThisServiceCta": {
+    "description": "Primary CTA label once everything required is selected."
+  },
+  "serviceUnavailableMessage": "الخدمة غير متاحة",
+  "@serviceUnavailableMessage": {
+    "description": "Shown in place of the CTA when a service is inactive."
+  },
+
+  "defaultVehicleBadge": "السيارة الافتراضية",
+  "@defaultVehicleBadge": {
+    "description": "Badge shown on the default vehicle's card."
+  },
+  "setAsDefaultAction": "تعيين كافتراضية",
+  "@setAsDefaultAction": {
+    "description": "Action on a non-default vehicle card that makes it the default."
+  },
+  "editAction": "تعديل",
+  "@editAction": {
+    "description": "Short edit button label on a vehicle card."
+  },
+  "editVehicleTitle": "تعديل السيارة",
+  "@editVehicleTitle": {
+    "description": "Page title for the vehicle form in edit mode."
+  },
+  "otherVehiclesTitle": "سيارات أخرى",
+  "@otherVehiclesTitle": {
+    "description": "Section header for non-default vehicles on My Cars."
+  },
+
+  "makeLabel": "الشركة المصنعة",
+  "@makeLabel": {
+    "description": "Vehicle form field label for the manufacturer."
+  },
+  "modelLabel": "الموديل",
+  "@modelLabel": {
+    "description": "Vehicle form field label for the model."
+  },
+  "yearLabel": "سنة الصنع",
+  "@yearLabel": {
+    "description": "Vehicle form field label for the model year."
+  },
+  "licensePlateLabel": "رقم اللوحة",
+  "@licensePlateLabel": {
+    "description": "Vehicle form field label for the license plate."
+  },
+  "saveVehicleCta": "حفظ السيارة",
+  "@saveVehicleCta": {
+    "description": "Primary CTA on the vehicle form in add mode."
+  },
+  "saveChangesCta": "حفظ التغييرات",
+  "@saveChangesCta": {
+    "description": "Primary CTA on the vehicle form in edit mode."
+  },
+  "savingLabel": "جارٍ الحفظ…",
+  "@savingLabel": {
+    "description": "Shown on the CTA while a save mutation is in flight."
+  },
+
+  "deleteVehicleTitle": "حذف السيارة؟",
+  "@deleteVehicleTitle": {
+    "description": "Title of the delete-vehicle confirmation dialog."
+  },
+  "deleteVehicleConfirmMessage": "هل أنت متأكد من رغبتك في إزالة {name} من سياراتك؟",
+  "@deleteVehicleConfirmMessage": {
+    "description": "Body of the delete-vehicle confirmation dialog, naming the vehicle.",
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "cancelAction": "إلغاء",
+  "@cancelAction": {
+    "description": "Cancel action on the delete confirmation dialog."
+  },
+  "deleteAction": "حذف",
+  "@deleteAction": {
+    "description": "Confirm-delete action on the delete confirmation dialog."
+  },
+  "deletingLabel": "جارٍ الحذف…",
+  "@deletingLabel": {
+    "description": "Shown while a delete mutation is in flight."
+  },
+
+  "vehicleSavedMessage": "تم حفظ السيارة",
+  "@vehicleSavedMessage": {
+    "description": "Success feedback after adding a vehicle."
+  },
+  "vehicleUpdatedMessage": "تم تحديث السيارة",
+  "@vehicleUpdatedMessage": {
+    "description": "Success feedback after editing a vehicle."
+  },
+  "vehicleDeletedMessage": "تم حذف السيارة",
+  "@vehicleDeletedMessage": {
+    "description": "Success feedback after deleting a vehicle."
+  },
+
+  "noVehiclesTitle": "لا توجد سيارات",
+  "@noVehiclesTitle": {
+    "description": "Empty state title on My Cars when there are no vehicles."
+  },
+  "addFirstVehicleCta": "أضف سيارتك الأولى",
+  "@addFirstVehicleCta": {
+    "description": "Empty state call to action on My Cars."
+  },
+  "unableToLoadVehiclesMessage": "تعذر تحميل السيارات",
+  "@unableToLoadVehiclesMessage": {
+    "description": "Error state message on My Cars."
+  },
+
+  "cannotDeleteVehicleTitle": "لا يمكن حذف السيارة",
+  "@cannotDeleteVehicleTitle": {
+    "description": "Title shown when deletion is blocked by an active/upcoming association."
+  },
+  "cannotDeleteVehicleMessage": "هذه السيارة مرتبطة بخدمة قادمة أو قيد التنفيذ.",
+  "@cannotDeleteVehicleMessage": {
+    "description": "Explanation shown when deletion is blocked."
+  },
+  "upcomingServiceReason": "خدمة قادمة",
+  "@upcomingServiceReason": {
+    "description": "Short reason label when a vehicle has an upcoming booking."
+  },
+  "activeServiceReason": "خدمة قيد التنفيذ",
+  "@activeServiceReason": {
+    "description": "Short reason label when a vehicle has an active service."
+  },
+
+  "selectVehicleTitle": "اختر السيارة",
+  "@selectVehicleTitle": {
+    "description": "Header for the generic reusable vehicle-selection widget."
+  },
+  "noVehiclesToSelectMessage": "لا توجد سيارات لاختيارها بعد.",
+  "@noVehiclesToSelectMessage": {
+    "description": "Empty state inside the generic vehicle-selection widget."
+  },
+
+  "fieldRequiredError": "هذا الحقل مطلوب",
+  "@fieldRequiredError": {
+    "description": "Generic required-field validation message."
+  },
+  "invalidYearError": "سنة غير صالحة",
+  "@invalidYearError": {
+    "description": "Validation message for an invalid vehicle year."
+  },
+  "invalidPlateError": "رقم لوحة غير صالح",
+  "@invalidPlateError": {
+    "description": "Validation message for an invalid license plate."
+  },
+  "saveVehicleErrorMessage": "تعذر حفظ السيارة. حاول مرة أخرى.",
+  "@saveVehicleErrorMessage": {
+    "description": "Error message when saving a vehicle fails."
+  },
+  "deleteVehicleErrorMessage": "تعذر حذف السيارة. حاول مرة أخرى.",
+  "@deleteVehicleErrorMessage": {
+    "description": "Error message when deleting a vehicle fails for a reason other than the block rule."
+  },
+  "moreActionsTooltip": "المزيد من الخيارات",
+  "@moreActionsTooltip": {
+    "description": "Accessibility tooltip for the vehicle card's overflow menu button."
+  },
+  "noVehiclesSubtitle": "أضف سيارتك لتسريع الحجز واختيار الخدمات.",
+  "@noVehiclesSubtitle": {
+    "description": "Empty state body text on My Cars when there are no vehicles."
+  },
+  "vehicleActionErrorMessage": "حدث خطأ ما. حاول مرة أخرى.",
+  "@vehicleActionErrorMessage": {
+    "description": "Generic error feedback for a vehicle mutation other than save/delete (e.g. set default)."
+  },
+
+  "serviceLabel": "الخدمة",
+  "@serviceLabel": {
+    "description": "Section label for the service on Booking Review."
+  },
+  "vehicleLabel": "السيارة",
+  "@vehicleLabel": {
+    "description": "Section label for the vehicle on Booking Review."
+  },
+  "serviceOptionLabel": "خيار الخدمة",
+  "@serviceOptionLabel": {
+    "description": "Section label for the service option on Booking Review, and its price-breakdown row label."
+  },
+  "locationLabel": "الموقع",
+  "@locationLabel": {
+    "description": "Section label for location — also used as the Location screen's title."
+  },
+  "dateTimeLabel": "التاريخ والوقت",
+  "@dateTimeLabel": {
+    "description": "Section label for date & time — also used as the Date & Time screen's title."
+  },
+  "continueCta": "متابعة",
+  "@continueCta": {
+    "description": "Primary CTA advancing to the next Booking step."
+  },
+
+  "chooseDateTitle": "اختر التاريخ",
+  "@chooseDateTitle": {
+    "description": "Header above the date strip on the Date & Time screen."
+  },
+  "availableTimeTitle": "الوقت المتاح",
+  "@availableTimeTitle": {
+    "description": "Header above the time slot grid on the Date & Time screen."
+  },
+  "noAvailableDatesMessage": "لا توجد تواريخ متاحة حاليًا.",
+  "@noAvailableDatesMessage": {
+    "description": "Empty state when no upcoming dates have availability."
+  },
+  "noAvailableTimesMessage": "لا توجد أوقات متاحة لهذا اليوم.",
+  "@noAvailableTimesMessage": {
+    "description": "Empty state when the selected date has no available time slots."
+  },
+  "chooseAnotherDateCta": "اختر تاريخًا آخر",
+  "@chooseAnotherDateCta": {
+    "description": "Recovery action shown alongside the no-available-times empty state."
+  },
+
+  "noSavedLocationsMessage": "لا توجد مواقع محفوظة بعد.",
+  "@noSavedLocationsMessage": {
+    "description": "Empty state on the Location screen when no saved locations are returned."
+  },
+
+  "reviewBookingTitle": "مراجعة الحجز",
+  "@reviewBookingTitle": {
+    "description": "Booking Review screen title."
+  },
+  "priceSummaryFeesLabel": "الرسوم",
+  "@priceSummaryFeesLabel": {
+    "description": "Fees row label in the Booking price breakdown."
+  },
+  "confirmBookingCta": "تأكيد الحجز",
+  "@confirmBookingCta": {
+    "description": "Primary CTA on Booking Review."
+  },
+  "confirmingLabel": "جارٍ التأكيد…",
+  "@confirmingLabel": {
+    "description": "Shown on the CTA while booking submission is in flight."
+  },
+  "bookingFailedMessage": "تعذر تأكيد الحجز. حاول مرة أخرى.",
+  "@bookingFailedMessage": {
+    "description": "Generic booking submission failure message."
+  },
+  "slotUnavailableMessage": "لم يعد هذا الموعد متاحًا. الرجاء اختيار وقت آخر.",
+  "@slotUnavailableMessage": {
+    "description": "Shown when the repository's revalidation finds the chosen time slot is no longer available."
+  },
+
+  "bookingConfirmedTitle": "تم تأكيد الحجز",
+  "@bookingConfirmedTitle": {
+    "description": "Booking Confirmation screen title/headline."
+  },
+  "confirmationSubtitle": "تم حجز خدمتك بنجاح.",
+  "@confirmationSubtitle": {
+    "description": "Subtitle under the Confirmation headline."
+  },
+  "bookingReferenceLabel": "رقم الحجز",
+  "@bookingReferenceLabel": {
+    "description": "Label preceding the booking reference code."
+  },
+  "backToHomeCta": "العودة إلى الرئيسية",
+  "@backToHomeCta": {
+    "description": "Secondary CTA on the Confirmation screen."
+  },
+
+  "trackingTimelineAssignedLabel": "تم تعيين الفني",
+  "@trackingTimelineAssignedLabel": {
+    "description": "Timeline step label on Tracking, between confirmed and on-the-way."
+  },
+  "bookingCancelledTitle": "تم إلغاء الحجز",
+  "@bookingCancelledTitle": {
+    "description": "Tracking headline for a cancelled booking."
+  },
+  "simulateProgressSectionTitle": "تجريبي: محاكاة تقدم الفني",
+  "@simulateProgressSectionTitle": {
+    "description": "Heading above Tracking's demo status-advance button, making clear it's a simulation, not a real technician action."
+  },
+  "simulateTechnicianOnTheWayCta": "محاكاة: الفني في الطريق",
+  "@simulateTechnicianOnTheWayCta": {
+    "description": "Tracking demo button: advances an upcoming booking to technicianOnTheWay."
+  },
+  "simulateStartServiceCta": "محاكاة: بدء الخدمة",
+  "@simulateStartServiceCta": {
+    "description": "Tracking demo button: advances a technicianOnTheWay booking to inProgress."
+  },
+  "simulateCompleteServiceCta": "محاكاة: تحديد كمكتمل",
+  "@simulateCompleteServiceCta": {
+    "description": "Tracking demo button: advances an inProgress booking to completed."
+  },
+  "statusUpdateFailedMessage": "تعذر تحديث حالة الحجز. حاول مرة أخرى.",
+  "@statusUpdateFailedMessage": {
+    "description": "Snackbar shown when a status-advance request fails."
+  },
+  "cancelBookingCta": "إلغاء الحجز",
+  "@cancelBookingCta": {
+    "description": "Button on Tracking that starts cancelling an upcoming booking."
+  },
+  "cancelBookingConfirmTitle": "إلغاء الحجز؟",
+  "@cancelBookingConfirmTitle": {
+    "description": "Title of the confirmation dialog shown before cancelling a booking."
+  },
+  "cancelBookingConfirmMessage": "هل أنت متأكد من رغبتك في إلغاء هذا الحجز؟ لا يمكن التراجع عن هذا الإجراء.",
+  "@cancelBookingConfirmMessage": {
+    "description": "Body of the confirmation dialog shown before cancelling a booking."
+  },
+  "keepBookingAction": "الاحتفاظ بالحجز",
+  "@keepBookingAction": {
+    "description": "Dismiss action on the cancel-booking confirmation dialog — backs out without cancelling."
+  },
+  "cancellingLabel": "جارٍ الإلغاء…",
+  "@cancellingLabel": {
+    "description": "Loading label shown on the cancel button while cancellation is in flight."
+  },
+  "bookingCancelledSuccessMessage": "تم إلغاء حجزك.",
+  "@bookingCancelledSuccessMessage": {
+    "description": "Snackbar shown after a booking is successfully cancelled."
+  },
+  "paymentTitle": "الدفع",
+  "@paymentTitle": {
+    "description": "AppBar title on the Payment screen."
+  },
+  "amountDueLabel": "المبلغ المستحق",
+  "@amountDueLabel": {
+    "description": "Label above the payment amount on the Payment screen."
+  },
+  "simulatePaymentCta": "محاكاة الدفع",
+  "@simulatePaymentCta": {
+    "description": "Button on the Payment screen that immediately marks the booking as paid via a local test simulation (no real payment gateway)."
+  },
+  "paymentSimulationNotice": "محاكاة دفع تجريبية — لن يتم خصم أي مبلغ فعلي.",
+  "@paymentSimulationNotice": {
+    "description": "Notice on the Payment screen clarifying that this is a test simulation, not a real charge."
+  },
+  "paymentSuccessTitle": "تم الدفع بنجاح",
+  "@paymentSuccessTitle": {
+    "description": "Title shown when a payment succeeds."
+  },
+  "paymentFailedTitle": "فشلت عملية الدفع",
+  "@paymentFailedTitle": {
+    "description": "Title shown when a payment attempt fails."
+  },
+  "paymentFailedMessage": "تعذر إتمام عملية الدفع. حاول مرة أخرى.",
+  "@paymentFailedMessage": {
+    "description": "Body message shown when a payment attempt fails."
+  },
+  "completePaymentCta": "إكمال الدفع",
+  "@completePaymentCta": {
+    "description": "Tracking screen CTA that opens Payment for a booking that hasn't been paid yet."
+  },
+  "paymentPendingLabel": "بانتظار الدفع",
+  "@paymentPendingLabel": {
+    "description": "Status label for a booking with no completed payment yet."
+  },
+  "bookingConfirmedNotificationTitle": "تم تأكيد الحجز",
+  "@bookingConfirmedNotificationTitle": {
+    "description": "Notification title when a booking is created."
+  },
+  "bookingConfirmedNotificationBody": "تم تأكيد حجزك بنجاح. رقم الحجز: {bookingReference}",
+  "@bookingConfirmedNotificationBody": {
+    "description": "Notification body when a booking is created.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "paymentSuccessfulNotificationTitle": "تم الدفع بنجاح",
+  "@paymentSuccessfulNotificationTitle": {
+    "description": "Notification title when a payment succeeds."
+  },
+  "paymentSuccessfulNotificationBody": "تم استلام دفعتك لحجزك رقم {bookingReference}.",
+  "@paymentSuccessfulNotificationBody": {
+    "description": "Notification body when a payment succeeds.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "paymentFailedNotificationTitle": "فشلت عملية الدفع",
+  "@paymentFailedNotificationTitle": {
+    "description": "Notification title when a payment attempt fails."
+  },
+  "paymentFailedNotificationBody": "تعذر إتمام الدفع لحجزك رقم {bookingReference}. حاول مرة أخرى.",
+  "@paymentFailedNotificationBody": {
+    "description": "Notification body when a payment attempt fails.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "technicianOnTheWayNotificationTitle": "الفني في الطريق",
+  "@technicianOnTheWayNotificationTitle": {
+    "description": "Notification title when a technician is dispatched."
+  },
+  "technicianOnTheWayNotificationBody": "الفني في طريقه إليك الآن لحجزك رقم {bookingReference}.",
+  "@technicianOnTheWayNotificationBody": {
+    "description": "Notification body when a technician is dispatched.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "serviceStartedNotificationTitle": "بدأت الخدمة",
+  "@serviceStartedNotificationTitle": {
+    "description": "Notification title when service work begins."
+  },
+  "serviceStartedNotificationBody": "بدأ الفني بتنفيذ الخدمة لحجزك رقم {bookingReference}.",
+  "@serviceStartedNotificationBody": {
+    "description": "Notification body when service work begins.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "serviceCompletedNotificationTitle": "اكتملت الخدمة",
+  "@serviceCompletedNotificationTitle": {
+    "description": "Notification title when service work finishes."
+  },
+  "serviceCompletedNotificationBody": "اكتملت خدمتك بنجاح لحجزك رقم {bookingReference}.",
+  "@serviceCompletedNotificationBody": {
+    "description": "Notification body when service work finishes.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "bookingCancelledNotificationTitle": "تم إلغاء الحجز",
+  "@bookingCancelledNotificationTitle": {
+    "description": "Notification title when a booking is cancelled."
+  },
+  "bookingCancelledNotificationBody": "تم إلغاء حجزك رقم {bookingReference}.",
+  "@bookingCancelledNotificationBody": {
+    "description": "Notification body when a booking is cancelled.",
+    "placeholders": {
+      "bookingReference": {"type": "String"}
+    }
+  },
+  "notificationsScreenTitle": "الإشعارات",
+  "@notificationsScreenTitle": {
+    "description": "AppBar title on the Notifications history screen."
+  },
+  "noNotificationsTitle": "لا توجد إشعارات",
+  "@noNotificationsTitle": {
+    "description": "Empty-state title on the Notifications screen."
+  },
+  "noNotificationsSubtitle": "ستظهر هنا التحديثات المتعلقة بحجوزاتك.",
+  "@noNotificationsSubtitle": {
+    "description": "Empty-state subtitle on the Notifications screen."
+  },
+  "unableToLoadNotificationsMessage": "تعذر تحميل الإشعارات",
+  "@unableToLoadNotificationsMessage": {
+    "description": "Error state message on the Notifications screen."
+  },
+  "bookingStepLabel": "الخطوة {current} من {total}",
+  "@bookingStepLabel": {
+    "description": "Accessibility label for the Booking progress indicator.",
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+
+  "activeBookingsSectionTitle": "النشطة",
+  "@activeBookingsSectionTitle": {
+    "description": "Bookings screen section header for upcoming/on-the-way/in-progress bookings."
+  },
+  "completedBookingsSectionTitle": "مكتملة",
+  "@completedBookingsSectionTitle": {
+    "description": "Bookings screen section header for completed bookings."
+  },
+  "cancelledBookingsSectionTitle": "ملغاة",
+  "@cancelledBookingsSectionTitle": {
+    "description": "Bookings screen section header for cancelled bookings."
+  },
+  "unableToLoadBookingsMessage": "تعذر تحميل الحجوزات",
+  "@unableToLoadBookingsMessage": {
+    "description": "Error state message on the Bookings screen."
+  },
+  "noBookingsTitle": "لا توجد حجوزات بعد",
+  "@noBookingsTitle": {
+    "description": "Empty state title on the Bookings screen."
+  },
+  "noBookingsSubtitle": "احجز خدمة وستظهر هنا.",
+  "@noBookingsSubtitle": {
+    "description": "Empty state body text on the Bookings screen."
+  },
+  "bookServiceCta": "احجز خدمة",
+  "@bookServiceCta": {
+    "description": "Empty-state call to action on the Bookings screen, navigating to Home."
+  },
+
+  "whereToServiceQuestion": "أين تريد أن تحصل على الخدمة؟",
+  "@whereToServiceQuestion": {
+    "description": "Heading at the top of the Location screen."
+  },
+  "useCurrentLocationCta": "استخدم الموقع الحالي",
+  "@useCurrentLocationCta": {
+    "description": "Prompt on the tappable current-location card before it has been resolved, on the Location screen."
+  },
+  "resolvingCurrentLocationMessage": "جارٍ تحديد موقعك الحالي…",
+  "@resolvingCurrentLocationMessage": {
+    "description": "Shown on the current-location card while permission/GPS/reverse-geocoding are in progress."
+  },
+  "locationPermissionDeniedMessage": "نحتاج إذن الوصول إلى الموقع لاستخدام موقعك الحالي.",
+  "@locationPermissionDeniedMessage": {
+    "description": "Shown when the user denies the location permission request."
+  },
+  "locationPermissionDeniedForeverMessage": "تم رفض إذن الموقع نهائيًا. فعّله من إعدادات التطبيق للمتابعة.",
+  "@locationPermissionDeniedForeverMessage": {
+    "description": "Shown when the location permission was permanently denied — the OS will not show its own dialog again."
+  },
+  "locationServiceDisabledMessage": "خدمات الموقع غير مفعّلة على جهازك. فعّلها للمتابعة.",
+  "@locationServiceDisabledMessage": {
+    "description": "Shown when the device's location services (GPS) are switched off entirely."
+  },
+  "currentLocationUnavailableMessage": "تعذر تحديد موقعك الحالي. حاول مرة أخرى.",
+  "@currentLocationUnavailableMessage": {
+    "description": "Generic fallback shown when obtaining the GPS fix or resolving it into an address fails."
+  },
+  "openLocationSettingsCta": "فتح الإعدادات",
+  "@openLocationSettingsCta": {
+    "description": "Action that opens the device's system settings, offered when location permission was permanently denied."
+  },
+  "chooseLocationSectionTitle": "اختر موقعًا",
+  "@chooseLocationSectionTitle": {
+    "description": "Section header above the saved-locations list on the Location screen."
+  },
+  "selectOnMapTitle": "التحديد على الخريطة",
+  "@selectOnMapTitle": {
+    "description": "Label for the \"select on a map\" row on the Location screen, and the map picker screen's own title."
+  },
+  "mapInstructionsMessage": "حرّك الخريطة لتحديد الموقع",
+  "@mapInstructionsMessage": {
+    "description": "Instruction shown above the map picker explaining how to choose a point."
+  },
+  "confirmLocationCta": "تأكيد الموقع",
+  "@confirmLocationCta": {
+    "description": "Button on the map picker that confirms the currently centered point and moves to the label/save step."
+  },
+  "mapLoadFailedMessage": "تعذر تحميل الخريطة.",
+  "@mapLoadFailedMessage": {
+    "description": "Shown when the map tiles fail to load."
+  },
+  "locationLabelFieldLabel": "اسم الموقع",
+  "@locationLabelFieldLabel": {
+    "description": "Text field label for naming a saved location on the map picker."
+  },
+  "locationLabelFieldHint": "مثال: المنزل، العمل",
+  "@locationLabelFieldHint": {
+    "description": "Placeholder hint for the location label text field."
+  },
+  "locationLabelRequiredError": "الرجاء إدخال اسم للموقع",
+  "@locationLabelRequiredError": {
+    "description": "Validation message when the user tries to save a location with an empty label."
+  },
+  "saveLocationCta": "حفظ الموقع",
+  "@saveLocationCta": {
+    "description": "Button that saves a newly picked location."
+  },
+  "editLocationTitle": "تعديل الموقع",
+  "@editLocationTitle": {
+    "description": "AppBar title for the map picker when editing an existing saved location."
+  },
+  "saveChangesLocationCta": "حفظ التغييرات",
+  "@saveChangesLocationCta": {
+    "description": "Button that saves changes to an existing saved location."
+  },
+  "locationSavedMessage": "تم حفظ الموقع",
+  "@locationSavedMessage": {
+    "description": "Confirmation shown after successfully saving a new location."
+  },
+  "locationUpdatedMessage": "تم تحديث الموقع",
+  "@locationUpdatedMessage": {
+    "description": "Confirmation shown after successfully updating a saved location."
+  },
+  "locationDeletedMessage": "تم حذف الموقع",
+  "@locationDeletedMessage": {
+    "description": "Confirmation shown after successfully deleting a saved location."
+  },
+  "saveLocationErrorMessage": "تعذر حفظ الموقع. حاول مرة أخرى.",
+  "@saveLocationErrorMessage": {
+    "description": "Error shown when saving a new location fails."
+  },
+  "updateLocationErrorMessage": "تعذر تحديث الموقع. حاول مرة أخرى.",
+  "@updateLocationErrorMessage": {
+    "description": "Error shown when updating a saved location fails."
+  },
+  "deleteLocationErrorMessage": "تعذر حذف الموقع. حاول مرة أخرى.",
+  "@deleteLocationErrorMessage": {
+    "description": "Error shown when deleting a saved location fails."
+  },
+  "deleteLocationTitle": "حذف الموقع",
+  "@deleteLocationTitle": {
+    "description": "Title of the confirm-delete dialog for a saved location."
+  },
+  "deleteLocationConfirmMessage": "هل تريد حذف \"{locationName}\"؟",
+  "@deleteLocationConfirmMessage": {
+    "description": "Body of the confirm-delete dialog for a saved location, naming it explicitly.",
+    "placeholders": {
+      "locationName": {"type": "String"}
+    }
+  },
+
+  "editProfileCta": "تعديل الملف الشخصي",
+  "@editProfileCta": {
+    "description": "Edit Profile call to action on the header, and the Edit Profile screen's title."
+  },
+  "accountSectionTitle": "الحساب",
+  "@accountSectionTitle": {
+    "description": "Profile section header for Personal Information/My Cars/Booking History."
+  },
+  "personalInformationTitle": "المعلومات الشخصية",
+  "@personalInformationTitle": {
+    "description": "Row label and screen title for Personal Information."
+  },
+  "bookingHistoryTitle": "سجل الحجوزات",
+  "@bookingHistoryTitle": {
+    "description": "Profile row that shortcuts to the Bookings tab."
+  },
+  "preferencesSectionTitle": "التفضيلات",
+  "@preferencesSectionTitle": {
+    "description": "Profile section header for Language/Notifications."
+  },
+  "languageLabel": "اللغة",
+  "@languageLabel": {
+    "description": "Language preference row label."
+  },
+  "languageArabic": "العربية",
+  "@languageArabic": {
+    "description": "Arabic option in the language picker."
+  },
+  "languageEnglish": "الإنجليزية",
+  "@languageEnglish": {
+    "description": "English option in the language picker."
+  },
+  "selectLanguageTitle": "اختر اللغة",
+  "@selectLanguageTitle": {
+    "description": "Title of the language picker sheet."
+  },
+  "supportSectionTitle": "الدعم",
+  "@supportSectionTitle": {
+    "description": "Profile section header for Help/Terms/Privacy."
+  },
+  "helpSupportTitle": "المساعدة والدعم",
+  "@helpSupportTitle": {
+    "description": "Row label and screen title for Help & Support."
+  },
+  "termsConditionsTitle": "الشروط والأحكام",
+  "@termsConditionsTitle": {
+    "description": "Row label and screen title for Terms & Conditions."
+  },
+  "privacyPolicyTitle": "سياسة الخصوصية",
+  "@privacyPolicyTitle": {
+    "description": "Row label and screen title for Privacy Policy."
+  },
+  "helpSupportBody": "لمساعدتك في أي استفسار حول الخدمة أو الحجز أو سيارتك، تواصل مع فريق دعم عناية بلس عبر البريد الإلكتروني أو رقم الدعم المتاح داخل التطبيق. فريقنا متاح للرد على استفساراتك وحل أي مشكلة تواجهك.",
+  "@helpSupportBody": {
+    "description": "Placeholder body text for the Help & Support screen."
+  },
+  "termsConditionsBody": "باستخدامك تطبيق عناية بلس، فإنك توافق على الشروط والأحكام المنظمة لاستخدام الخدمة، بما في ذلك حجز الخدمات وإدارة سياراتك وبياناتك داخل التطبيق. سيتم تحديث هذه الشروط عند الحاجة، وسنقوم بإعلامك بأي تغييرات جوهرية.",
+  "@termsConditionsBody": {
+    "description": "Placeholder body text for the Terms & Conditions screen."
+  },
+  "privacyPolicyBody": "نحرص في عناية بلس على خصوصية بياناتك. تُستخدم معلوماتك الشخصية وبيانات سيارتك فقط لتقديم وتحسين خدماتنا، ولا تتم مشاركتها مع أي جهة خارجية دون موافقتك، إلا في الحدود التي يتطلبها تقديم الخدمة أو يفرضها النظام.",
+  "@privacyPolicyBody": {
+    "description": "Placeholder body text for the Privacy Policy screen."
+  },
+  "signOutAction": "تسجيل الخروج",
+  "@signOutAction": {
+    "description": "Sign Out row label, and the confirm button on its dialog."
+  },
+  "signOutConfirmTitle": "تسجيل الخروج؟",
+  "@signOutConfirmTitle": {
+    "description": "Title of the sign-out confirmation dialog."
+  },
+  "signOutConfirmMessage": "هل أنت متأكد من رغبتك في تسجيل الخروج من حسابك؟",
+  "@signOutConfirmMessage": {
+    "description": "Body of the sign-out confirmation dialog."
+  },
+  "signedOutMessage": "تم تسجيل خروجك بنجاح.",
+  "@signedOutMessage": {
+    "description": "Feedback shown after the mock sign-out action completes."
+  },
+  "fullNameLabel": "الاسم الكامل",
+  "@fullNameLabel": {
+    "description": "Full name field label on Edit Profile and Personal Information."
+  },
+  "emailOptionalLabel": "البريد الإلكتروني (اختياري)",
+  "@emailOptionalLabel": {
+    "description": "Email field label on Edit Profile — marked optional since it isn't required."
+  },
+  "phoneNumberLabel": "رقم الجوال",
+  "@phoneNumberLabel": {
+    "description": "Phone number field label on Edit Profile and Personal Information."
+  },
+  "phoneNumberNotEditableNote": "لا يمكن تغيير رقم الجوال من هنا.",
+  "@phoneNumberNotEditableNote": {
+    "description": "Helper text under the read-only phone number field on Edit Profile."
+  },
+  "profileUpdatedMessage": "تم تحديث الملف الشخصي",
+  "@profileUpdatedMessage": {
+    "description": "Success feedback after saving Edit Profile."
+  },
+  "updateProfileErrorMessage": "تعذر تحديث الملف الشخصي. حاول مرة أخرى.",
+  "@updateProfileErrorMessage": {
+    "description": "Error message when saving Edit Profile fails."
+  },
+  "invalidEmailError": "بريد إلكتروني غير صالح",
+  "@invalidEmailError": {
+    "description": "Validation message for a malformed email address."
+  },
+  "nameTooShortError": "الاسم قصير جدًا",
+  "@nameTooShortError": {
+    "description": "Validation message when the full name is below the minimum length."
+  },
+  "notProvidedLabel": "غير متوفر",
+  "@notProvidedLabel": {
+    "description": "Shown in place of an optional field (e.g. email) that has no value."
+  },
+
+  "authWelcomeTitle": "مرحبًا بك في عناية بلس",
+  "@authWelcomeTitle": {
+    "description": "Headline on the Phone Number screen."
+  },
+  "authPhonePrompt": "أدخل رقم جوالك للمتابعة",
+  "@authPhonePrompt": {
+    "description": "Subtitle on the Phone Number screen."
+  },
+  "sendCodeCta": "إرسال الرمز",
+  "@sendCodeCta": {
+    "description": "Primary action on the Phone Number screen."
+  },
+  "sendingCodeLabel": "جارٍ الإرسال…",
+  "@sendingCodeLabel": {
+    "description": "Shown on the CTA while the verification request is in flight."
+  },
+  "otpScreenTitle": "تحقق من رقمك",
+  "@otpScreenTitle": {
+    "description": "OTP screen title."
+  },
+  "otpSentToLabel": "تم إرسال الرمز إلى {phone}",
+  "@otpSentToLabel": {
+    "description": "Subtitle on the OTP screen naming the number the code was sent to.",
+    "placeholders": {
+      "phone": {"type": "String"}
+    }
+  },
+  "otpFieldLabel": "رمز التحقق",
+  "@otpFieldLabel": {
+    "description": "Label for the OTP entry field."
+  },
+  "verifyCodeCta": "تحقق",
+  "@verifyCodeCta": {
+    "description": "Primary action on the OTP screen."
+  },
+  "verifyingCodeLabel": "جارٍ التحقق…",
+  "@verifyingCodeLabel": {
+    "description": "Shown on the CTA while OTP verification is in flight."
+  },
+  "resendCodeCta": "إعادة إرسال الرمز",
+  "@resendCodeCta": {
+    "description": "Resend action on the OTP screen, enabled once the cooldown elapses."
+  },
+  "resendCodeInLabel": "إعادة الإرسال خلال {duration}",
+  "@resendCodeInLabel": {
+    "description": "Resend cooldown countdown on the OTP screen.",
+    "placeholders": {
+      "duration": {"type": "String"}
+    }
+  },
+  "changeNumberAction": "تغيير الرقم",
+  "@changeNumberAction": {
+    "description": "Lets the user go back to the Phone Number screen to re-enter their number."
+  },
+  "invalidPhoneNumberError": "أدخل رقم جوال سعودي صحيح",
+  "@invalidPhoneNumberError": {
+    "description": "Validation message for a malformed Saudi phone number."
+  },
+  "invalidOtpError": "الرمز غير صحيح. حاول مرة أخرى.",
+  "@invalidOtpError": {
+    "description": "Shown when Firebase rejects the entered OTP as incorrect."
+  },
+  "otpExpiredError": "انتهت صلاحية هذا الرمز. الرجاء طلب رمز جديد.",
+  "@otpExpiredError": {
+    "description": "Shown when the verification session has expired."
+  },
+  "tooManyRequestsError": "محاولات كثيرة جدًا. حاول مرة أخرى لاحقًا.",
+  "@tooManyRequestsError": {
+    "description": "Shown when Firebase rate-limits further attempts."
+  },
+  "authNetworkErrorMessage": "خطأ في الشبكة. تحقق من اتصالك وحاول مرة أخرى.",
+  "@authNetworkErrorMessage": {
+    "description": "Shown when a verification/sign-in request fails due to connectivity."
+  },
+  "authUnknownErrorMessage": "حدث خطأ ما. حاول مرة أخرى.",
+  "@authUnknownErrorMessage": {
+    "description": "Generic fallback error message for the auth flow."
+  }
+}

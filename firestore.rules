@@ -1,0 +1,167 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Each user may read and write only their own users/{uid} document.
+    // Services, etc. get their own rules in later milestones when those
+    // collections are actually introduced.
+    match /users/{userId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId;
+
+      // Each user may read and write only their own vehicles.
+      match /cars/{carId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == userId;
+      }
+
+      // Each user may read and create only their own bookings, in full —
+      // createBooking() writes the complete document (service/vehicle/
+      // location snapshots, price, the initial "upcoming" status, etc).
+      match /bookings/{bookingId} {
+        allow read: if request.auth != null
+                    && request.auth.uid == userId;
+        allow create: if request.auth != null
+                      && request.auth.uid == userId;
+
+        // BE-05: status-lifecycle updates only. There is no
+        // technician/dispatch role in this project's auth architecture
+        // (see booking_status_controller.dart's own doc comment) — the
+        // owning customer's app is the only mechanism available to drive
+        // the demo lifecycle, so this can't be restricted to "a technician,
+        // not the customer" the way a production system would. What CAN be
+        // enforced here: an update may touch nothing except the three
+        // lifecycle fields (every snapshot/price/reference field stays
+        // create-time-only), and the requested status transition must be
+        // one of BookingStatus's approved edges — mirroring
+        // booking_status_transition.dart's exact `bookingStatusTransitions`
+        // map, so this rule is the real enforcement boundary and the
+        // Dart-side check is only a fast client-side pre-check, not the
+        // only guard.
+        allow update: if request.auth != null
+                      && request.auth.uid == userId
+                      && request.resource.data.diff(resource.data).affectedKeys()
+                           .hasOnly(['status', 'statusUpdatedAt', 'estimatedArrival'])
+                      && (
+                        (resource.data.status == 'upcoming' && request.resource.data.status == 'technicianOnTheWay') ||
+                        (resource.data.status == 'upcoming' && request.resource.data.status == 'cancelled') ||
+                        (resource.data.status == 'technicianOnTheWay' && request.resource.data.status == 'inProgress') ||
+                        (resource.data.status == 'inProgress' && request.resource.data.status == 'completed')
+                      );
+
+        // No booking has ever been deletable by a client — this was
+        // already true under the old blanket `write` rule (nothing in the
+        // app ever called a delete), just made explicit now that create/
+        // update are split out.
+        allow delete: if false;
+
+        // A booking's payment lives at a single, deterministic sub-document
+        // (one fixed doc, no history collection) — see
+        // FirestorePaymentRepository's own doc comment. Client-authoritative
+        // Sandbox flow: the owning customer's own authenticated session is
+        // the only writer, same ownership check as every other owned
+        // sub-collection in this file. TEST/PORTFOLIO ONLY — a real
+        // production integration would need a privileged, server-verified
+        // writer instead of trusting the client for `status`/`amount`.
+        match /payment/{paymentId} {
+          allow read, write: if request.auth != null
+                             && request.auth.uid == userId;
+        }
+      }
+
+      // Each user may read and write only their own saved locations.
+      match /locations/{locationId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == userId;
+      }
+
+      // BE-08: notification history. Written directly by the client — this
+      // project has no server/dispatch role to write them on its behalf
+      // (see booking_status_controller.dart's own doc comment on the same
+      // architectural constraint from BE-05), so create must be allowed
+      // here, scoped strictly to the owner and to the exact known shape.
+      // `title`/`body` aren't further validated beyond `is string` — unlike
+      // Payment's `amount`, there's no authoritative server-side value to
+      // cross-check display copy against, and nothing security-sensitive
+      // depends on their exact contents.
+      match /notifications/{notificationId} {
+        allow read: if request.auth != null
+                    && request.auth.uid == userId;
+        allow create: if request.auth != null
+                      && request.auth.uid == userId
+                      && request.resource.data.type is string
+                      && request.resource.data.title is string
+                      && request.resource.data.body is string;
+
+        // Only `isRead` may ever change after creation — every other field
+        // (type/title/body/bookingReference/createdAt) is create-time-only,
+        // the same "snapshot fields never change after creation"
+        // philosophy every other update rule in this file already uses.
+        allow update: if request.auth != null
+                      && request.auth.uid == userId
+                      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead']);
+
+        allow delete: if false;
+      }
+
+      // BE-08: FCM device-token registration, keyed by the token itself
+      // (see FirestoreDeviceTokenRepository's own doc comment for why).
+      // Re-registering the SAME unchanged token (an app relaunch with no
+      // token rotation) is a Firestore *update*, not a create — the
+      // document already exists at that id — so update must be allowed
+      // too, not just create; it's scoped to `updatedAt` only, since a
+      // genuine token/platform change is a different document entirely
+      // (a new token = a new id) rather than an edit of this one. Not read
+      // by the app's own UI, but kept readable by the owner for the same
+      // reason every other owned collection in this file is.
+      match /devices/{deviceId} {
+        allow read: if request.auth != null
+                    && request.auth.uid == userId;
+        allow create: if request.auth != null
+                      && request.auth.uid == userId
+                      && request.resource.data.token is string
+                      && request.resource.data.platform is string;
+        allow update: if request.auth != null
+                      && request.auth.uid == userId
+                      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['updatedAt']);
+        allow delete: if request.auth != null
+                      && request.auth.uid == userId;
+      }
+    }
+
+    // Global, shared slot-claim records — deliberately NOT nested under
+    // users/{userId}, since availability is a resource every authenticated
+    // user needs to read the same view of, not per-user data. A document's
+    // mere existence means "claimed"; there are no pre-created "available"
+    // documents. Only a create is ever allowed, and only when the claimer
+    // is claiming on their own behalf (claimedByUid must match the caller).
+    // A slot claim is never updatable by a client — only deletable, and
+    // only by the uid that claimed it (BE-06: cancelling a booking releases
+    // its slot). This can't cross-check that the release is actually
+    // happening in lockstep with that booking transitioning to cancelled —
+    // this document has no reference back to the booking's own Firestore
+    // path, only its human-readable `bookingReference` field, which a
+    // security rule has no query capability to resolve to an exact
+    // document. Full enforcement of that invariant would need either a
+    // Cloud Function or a schema change storing a direct document
+    // cross-reference, both out of this milestone's scope — documented here
+    // rather than guessed at. FirestoreBookingRepository.cancelBooking is
+    // the sole intended caller, and it already verifies ownership
+    // structurally (the booking query is scoped to the caller's own uid)
+    // and only ever deletes a claim whose stored `bookingReference` matches
+    // the booking it's cancelling.
+    match /serviceSlots/{slotId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+                    && request.resource.data.claimedByUid == request.auth.uid;
+      allow update: if false;
+      allow delete: if request.auth != null
+                    && resource.data.claimedByUid == request.auth.uid;
+    }
+
+    // Everything else is denied by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

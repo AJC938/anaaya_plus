@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887356830038",
+    "project_id": "anaaya-plus",
+    "storage_bucket": "anaaya-plus.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887356830038:android:db3d6235c862e9e79f26f7",
+        "android_client_info": {
+          "package_name": "sa.com.anaayaplus.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu1_21aHMXnIg0axNTAPF8d4lXcpFfbqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
