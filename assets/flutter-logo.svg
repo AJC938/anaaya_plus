@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Flutter logo</title>
+  <desc id="desc">Flutter brand mark used in the project README as requested.</desc>
+  <rect width="160" height="160" rx="28" fill="#ffffff"/>
+  <path d="M79 25h52l-53 53-26-26z" fill="#54C5F8"/>
+  <path d="M79 78h52l-26 26H53z" fill="#54C5F8"/>
+  <path d="M53 104h52l-26 26-26-26z" fill="#01579B"/>
+  <path d="M79 104h26l26 26H79l-13-13z" fill="#29B6F6" opacity=".98"/>
+</svg>
