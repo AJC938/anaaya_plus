@@ -1,211 +1,362 @@
 # Anaaya Plus (عناية بلس)
 
-A mobile car-service booking app for the Saudi market — a customer books a service, a
-technician comes to them. Built with Flutter, Firebase, and Supabase Edge Functions as a
-software-engineering portfolio project.
+[![Flutter](https://img.shields.io/badge/Flutter-Dart-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-Backend-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Edge%20Functions-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![CI](https://github.com/AJC938/anaaya_plus/actions/workflows/flutter.yml/badge.svg)](https://github.com/AJC938/anaaya_plus/actions/workflows/flutter.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+> **Anaaya Plus** is a Flutter-based automotive service booking platform for the Saudi market. Customers can discover services, manage vehicles, choose locations and time slots, complete a test payment flow, and follow a simulated technician-dispatch lifecycle.
+
+**Project type:** Software-engineering portfolio / test application  
+**Primary client:** Flutter / Dart  
+**Backend services:** Firebase + Supabase Edge Functions  
+**Localization:** Arabic (RTL) + English (LTR)
+
+---
 
 ## Overview
 
-Anaaya Plus implements a full customer-facing booking lifecycle: browse services, pick a
-vehicle and time slot, confirm a location, complete a (simulated) payment, and track the
-booking through a simulated technician-dispatch lifecycle — with real push notifications and a
-custom phone/OTP authentication flow behind it.
+Anaaya Plus was built to demonstrate more than a collection of UI screens. The project implements a complete customer-facing booking lifecycle with authentication, persistence, authorization, scheduling, notifications, backend execution, localization, automated tests, and documented architectural boundaries.
 
-**This is a test/portfolio project, not a production service.** Two subsystems are explicitly
-simulated rather than real:
+The core journey is:
 
-- **Payment** is a local test simulation — there is no payment gateway integration. Pressing
-  "Simulate Payment" writes a `paid` record directly to Firestore. No card data, no gateway
-  credentials, no money moves anywhere.
-- **SMS delivery** uses Twilio's zero-cost TEST credentials — no real SMS is ever sent. The
-  backend can optionally echo the generated OTP back to the client in test mode so the flow is
-  fully verifiable without a real phone.
+```text
+Phone number
+    ↓
+OTP verification
+    ↓
+Firebase authenticated session
+    ↓
+Service selection
+    ↓
+Vehicle + service options
+    ↓
+Location
+    ↓
+Date / time slot
+    ↓
+Booking review
+    ↓
+Test payment
+    ↓
+Confirmation
+    ↓
+Technician-dispatch tracking
+    ↓
+Completed
+```
 
-Everything else — Firebase Authentication sessions, Firestore data, FCM push notifications,
-Firestore security rules, the booking/scheduling state machine — is real and enforced the same
-way it would be in a production app; only the two external-money/external-SMS integration
-points are stubbed out.
+> **Important:** This is a portfolio/test application, not a production automotive service. Payment, SMS delivery, and technician dispatch are intentionally simulated/test-mode components.
+
+---
 
 ## Key Features
 
-- Custom phone-number + OTP sign-in (not Firebase's native phone auth — see Architecture)
-- Vehicle management (add/edit/delete)
-- Service catalog with per-service options and dynamic pricing
-- Saved locations, current-location detection, and a map picker
-- Slot-based scheduling with atomic, race-safe slot claiming
-- Local test payment simulation with a real Firestore-backed payment record
-- Simulated technician-dispatch tracking lifecycle (assigned → on the way → in progress →
-  completed) with booking cancellation
-- Push notifications (FCM) tied to booking/payment lifecycle events
-- Full Arabic (RTL, primary) and English (LTR) localization
+### Authentication
+
+- Custom phone-number + OTP authentication flow.
+- Supabase Edge Functions handle OTP generation and verification.
+- OTP verification produces a Firebase Custom Token.
+- Flutter exchanges the token through `FirebaseAuth.signInWithCustomToken()`.
+- Server-side OTP controls include expiry, attempt limits, resend cooldown, rate limiting, one-time use, and replay rejection.
+
+### Automotive services
+
+- Service catalog.
+- Per-service options and dynamic pricing.
+- Vehicle add/edit/delete management.
+- Booking lifecycle and cancellation.
+
+### Scheduling
+
+- Date/time slot selection.
+- Firestore-backed slot availability.
+- Transaction-based slot claiming to reduce race conditions between concurrent clients.
+
+### Location
+
+- Saved customer locations.
+- Current-location detection.
+- Map-based location picker.
+- Geocoding/location services.
+
+### Payments
+
+- Local test payment simulation.
+- Firestore-backed payment record.
+- No real gateway, card processing, or money movement.
+
+### Tracking & notifications
+
+- Simulated technician-dispatch lifecycle:
+  `Assigned → On the way → In progress → Completed`.
+- Booking cancellation where permitted by the current state.
+- Firebase Cloud Messaging push notifications.
+- In-app notification history/device-token handling.
+
+### Localization
+
+- Arabic-first RTL experience.
+- English LTR experience.
+- Flutter `gen-l10n` localization workflow.
+
+---
 
 ## Architecture
 
+```text
+                         ┌──────────────────────┐
+                         │    Flutter / Dart     │
+                         │                      │
+                         │ go_router            │
+                         │ Riverpod             │
+                         │ Feature modules      │
+                         └──────────┬───────────┘
+                                    │
+                  ┌─────────────────┼──────────────────┐
+                  │                 │                  │
+                  ▼                 ▼                  ▼
+          Firebase Auth      Cloud Firestore          FCM
+          Custom Token       app data + rules        Push
+                  ▲
+                  │
+                  │ OTP backend
+                  │
+          ┌───────┴────────┐
+          │ Supabase Edge  │
+          │   Functions    │
+          └───────┬────────┘
+                  │
+             ┌────┴─────┐
+             ▼          ▼
+       Twilio TEST   Firebase Admin
+          API        Custom Token
 ```
-Flutter (Riverpod + go_router)
-  │
-  ├─ Firebase Authentication  — session of record for the whole app
-  ├─ Cloud Firestore          — bookings, vehicles, locations, payments, notifications, device tokens
-  ├─ Firebase Cloud Messaging — push notifications
-  │
-  └─ Supabase Edge Functions (Deno) — backend execution for the OTP flow only
-       ├─ send-otp     → generates + hashes an OTP, calls Twilio TEST API
-       ├─ verify-otp   → validates the OTP, mints a Firebase Custom Token
-       └─ Firebase Custom Token → FirebaseAuth.signInWithCustomToken() → real Firebase session
-```
 
-**Why a custom OTP flow instead of Firebase's native phone auth?** Firebase's own phone
-verification requires Play Integrity / SafetyNet and a real SMS provider, which isn't practical
-for a zero-cost portfolio demo. Instead: a Supabase Edge Function generates and hashes a
-one-time code, sends it through Twilio's official TEST credentials (magic numbers that are
-validated but never actually deliver or bill), and — once verified — mints a Firebase Custom
-Token that the Flutter app exchanges for a real, fully-functional Firebase Authentication
-session. From that point on, the app behaves exactly as if the user had signed in through any
-other Firebase Auth method: the same `authStateChanges()` stream, the same ID tokens, the same
-Firestore security-rule enforcement.
+The client is organized around feature boundaries and repository/data abstractions. Firebase is the session and application-data boundary, while Supabase Edge Functions provide isolated backend execution for the custom OTP flow.
 
-**Payment is intentionally client-authoritative.** `PaymentController.submitPayment` writes
-directly to `bookings/{id}/payment/latest`, gated only by Firestore security rules (the owning
-user may write their own payment document). There is no server-side verification step — a real
-production integration would need one. This is documented in code (see
-`lib/features/payment/data/payment_repository.dart`) and called out explicitly here so it's
-never mistaken for a production-ready payment path.
+For the detailed architecture and design decisions, see [`docs/architecture/ARCHITECTURE.md`](docs/architecture/ARCHITECTURE.md) and [`docs/adr/0001-flutter-firebase-supabase.md`](docs/adr/0001-flutter-firebase-supabase.md).
 
-**OTP security controls** (enforced server-side, in `supabase/functions/_shared/otpStore.ts`):
-5-minute expiry, a maximum of 5 verification attempts, a 60-second resend cooldown, a 3 sends/
-hour rate limit per phone number, one-time use, and replay rejection after a successful
-verification.
+---
 
 ## Technology Stack
 
 | Layer | Technology |
 |---|---|
-| Client | Flutter (Dart), Riverpod, go_router |
-| Auth session | Firebase Authentication (Custom Token sign-in) |
+| Mobile client | Flutter / Dart |
+| State management | Riverpod |
+| Navigation | go_router |
+| Authentication | Firebase Authentication |
 | Database | Cloud Firestore |
 | Push notifications | Firebase Cloud Messaging |
-| Backend execution | Supabase Edge Functions (Deno) |
-| OTP delivery (test mode) | Twilio TEST Messaging API |
+| Backend execution | Supabase Edge Functions / Deno |
+| OTP test delivery | Twilio TEST API |
 | Maps | flutter_map / OpenStreetMap |
-| Location | geolocator, geocoding |
-| Localization | Flutter's official `gen-l10n` (Arabic + English) |
+| Location | geolocator / geocoding |
+| Localization | Flutter `gen-l10n` |
+| Testing | Flutter test / widget tests / Deno tests |
+| CI | GitHub Actions |
 
-## Application Flow
-
-```
-Phone number → OTP (Twilio TEST) → Firebase Custom Token → Firebase session
-  → Home → pick a service → pick a vehicle/options → pick a location
-  → pick a date/time slot → review → Simulate Payment → Confirmation
-  → Tracking (simulated technician dispatch) → Completed
-```
-
-Every step from vehicle selection onward reads/writes real Firestore documents scoped to the
-signed-in user's UID and enforced by `firestore.rules`.
-
-## Screenshots
-
-Not included in this repository snapshot. The app can be run directly via `flutter run` on an
-Android emulator or a physical device to see the full flow end to end.
-
-## Testing
-
-Latest results, run locally against this repository:
-
-| Suite | Command | Result |
-|---|---|---|
-| Flutter unit/widget tests | `flutter test` | **629 passed**, 0 failed |
-| Flutter static analysis | `flutter analyze` | **1 info-level lint**, 0 errors, 0 warnings |
-| Supabase/Deno backend tests | `deno test --allow-net --allow-env supabase/functions/_shared/` | **70 passed**, 0 failed |
-
-The single remaining `flutter analyze` finding is a `prefer_initializing_formals` style
-suggestion, not a correctness issue.
-
-Test coverage includes: phone number validation, OTP request/verification (success, expiry,
-rate-limiting, replay), Firebase Custom Token minting/exchange, Firestore repository behavior
-(bookings, vehicles, locations, payments, notifications, device tokens) against realistic
-fakes, booking/payment/notification status-transition state machines, and full-screen widget
-tests for every major flow in both Arabic and English.
+---
 
 ## Project Structure
 
+```text
+anaaya_plus/
+├── android/                 # Android platform project
+├── ios/                     # iOS platform project
+├── lib/
+│   ├── app/                 # App bootstrap, router, application shell
+│   ├── core/                # Shared infrastructure, theme, localization, widgets
+│   ├── features/
+│   │   ├── auth/            # Phone / OTP authentication
+│   │   ├── booking/         # Booking lifecycle and tracking
+│   │   ├── bookings/        # Booking list
+│   │   ├── cars/            # Vehicle management
+│   │   ├── home/            # Home experience
+│   │   ├── location/        # Locations and map picker
+│   │   ├── notifications/   # FCM and notification history
+│   │   ├── payment/         # Test payment simulation
+│   │   ├── profile/         # Profile/settings
+│   │   ├── scheduling/      # Slot availability/claiming
+│   │   └── services/        # Service catalog/options
+│   └── l10n/                # ARB localization sources
+├── supabase/
+│   └── functions/           # OTP/backend Edge Functions + shared tests
+├── test/                    # Flutter unit/widget/repository tests
+├── Screenshots/             # Curated UI evidence
+├── docs/
+│   ├── architecture/        # Architecture documentation
+│   ├── adr/                 # Architecture decision records
+│   ├── testing/             # Testing strategy and evidence
+│   └── portfolio/           # Portfolio documentation hub
+├── firestore.rules          # Firestore authorization rules
+├── firestore.indexes.json   # Firestore indexes
+├── pubspec.yaml             # Flutter dependencies and project metadata
+└── README.md
 ```
-lib/
-  app/                    # MaterialApp.router, go_router route table
-  core/
-    localization/         # gen-l10n output + locale provider
-    supabase/              # Supabase Edge Function HTTP clients (OTP)
-    theme/                 # ThemeData
-    widgets/                # shared UI components
-  features/
-    auth/                  # phone/OTP sign-in, Firebase Auth session
-    booking/                # booking creation, status lifecycle, tracking, cancellation
-    bookings/               # bookings list screen
-    cars/                   # vehicle management
-    home/                   # home dashboard
-    location/               # saved locations, current location, map picker
-    notifications/          # FCM registration, in-app notification history
-    payment/                # local payment simulation
-    profile/                # account/profile settings
-    scheduling/             # slot availability + atomic slot claiming
-    services/               # service catalog + options
-  l10n/                    # .arb translation source files
-  firebase_options.dart     # FlutterFire-generated Firebase config (public identifiers only)
-  main.dart
 
-supabase/
-  functions/
-    send-otp/              # requests an OTP (Supabase + Twilio TEST)
-    verify-otp/             # verifies an OTP, mints a Firebase Custom Token
-    verify-firebase-auth/   # verifies a Firebase ID token server-side
-    health-check/           # trivial liveness check
-    _shared/                # phone normalization, OTP store, Twilio/Firebase clients, tests
+---
 
-android/, ios/              # native platform projects
-test/                       # mirrors lib/ — unit, widget, and repository tests
-firestore.rules             # Firestore security rules
-firestore.indexes.json      # Firestore composite index definitions
-```
+## Screenshots
+
+Selected screens from the current project snapshot:
+
+| Home | Login | Services |
+|---|---|---|
+| ![Home](Screenshots/Home.png) | ![Login](Screenshots/Login.png) | ![Cars](Screenshots/Cars.png) |
+
+| Location | Date | Confirmation |
+|---|---|---|
+| ![Location](Screenshots/Location.png) | ![Date](Screenshots/Date.png) | ![Confirmation](Screenshots/Confirmation.png) |
+
+| Profile | Tracking | Booking completion |
+|---|---|---|
+| ![Profile](Screenshots/Profile.png) | ![Tracking](Screenshots/Tracking.png) | ![Completion](Screenshots/Complate.png) |
+
+---
+
+## Testing
+
+The repository includes automated tests across client, business logic, repositories, UI flows, and backend shared utilities.
+
+### Current documented baseline
+
+| Area | Command | Result |
+|---|---|---|
+| Flutter tests | `flutter test` | **629 passed, 0 failed** |
+| Flutter analysis | `flutter analyze` | **0 errors, 0 warnings; 1 info-level style finding** |
+| Deno backend tests | `deno test --allow-net --allow-env supabase/functions/_shared/` | **70 passed, 0 failed** |
+
+Coverage includes authentication/OTP behavior, Firebase Custom Token exchange, repositories, booking/payment/notification state transitions, scheduling behavior, and major Arabic/English widget flows.
+
+See [`docs/testing/TESTING.md`](docs/testing/TESTING.md) for the testing strategy.
+
+---
 
 ## Getting Started
 
+### Prerequisites
+
+- Flutter SDK compatible with the project's Dart SDK constraint.
+- Android Studio or an Android-capable Flutter environment.
+- A configured Firebase project for the application's Firebase services.
+- Supabase CLI only if you need to run/deploy the OTP backend.
+
+### Install
+
 ```bash
 flutter pub get
+```
+
+### Run
+
+```bash
 flutter run
 ```
 
-Localization (`lib/core/localization/app_localizations*.dart`) is generated from
-`lib/l10n/*.arb` via `flutter gen-l10n` and is not committed — it regenerates automatically on
-`flutter pub get` / `flutter run` / `flutter build`.
+### Verify
 
-The Supabase backend (`supabase/functions/`) is deployed separately via the Supabase CLI
-(`npx supabase functions deploy <name>`) and is not required to build the Flutter app itself —
-it's only needed for the phone/OTP sign-in flow to reach a real backend.
+```bash
+flutter analyze
+flutter test
+```
 
-## Demo / Portfolio Notes
+Localization is generated from the ARB sources under `lib/l10n/` and should not be edited as generated output.
 
-This project was built to demonstrate:
+---
 
-- A real, working Firebase Authentication integration built on a **custom** credential flow
-  (OTP → Custom Token) rather than a stock SDK method
-- Backend logic (OTP generation/hashing/rate-limiting, JWT-bearer service-account tokens) written
-  and tested independently of the Flutter client, in Deno/TypeScript
-- Firestore security rules as the actual enforcement boundary, not just client-side checks
-- Atomic, race-safe resource claiming (booking slots) using Firestore transactions
-- A layered, testable architecture (domain / data / application / presentation) applied
-  consistently across every feature
-- Comprehensive automated test coverage across both the Flutter client and the Deno backend
+## Backend / OTP Flow
 
-## Known Scope & Limitations
+The custom OTP flow is intentionally separated from the Flutter client:
 
-- **No real payment processing.** Payment status is decided and written by the client. This is
-  explicitly unsuitable for real money and would need a genuine gateway integration plus
-  server-side verification in any production use.
-- **No real SMS delivery.** Twilio TEST credentials never send or bill for a real message.
-- **No real technician dispatch.** Tracking status changes are simulated by the customer's own
-  app (there is no technician-facing app or role in this project).
-- **No real-time GPS tracking of a technician** — location features cover the customer's own
-  saved/current location only.
-- Not hardened, load-tested, or reviewed for production/enterprise deployment.
+```text
+Flutter
+  │
+  ├── request OTP ──────→ Supabase send-otp
+  │                           │
+  │                           └── generate/hash/store OTP
+  │                           └── Twilio TEST API
+  │
+  └── verify OTP ───────→ Supabase verify-otp
+                              │
+                              └── validate OTP controls
+                              └── mint Firebase Custom Token
+                                      │
+                                      ▼
+                              FirebaseAuth session
+```
+
+This separation demonstrates a real backend execution boundary instead of putting the entire authentication workflow inside the client.
+
+---
+
+## Security & Trust Boundaries
+
+- Firestore security rules are part of the authorization boundary.
+- OTP verification controls are enforced server-side.
+- Production service-account private keys must never be committed.
+- Payment is not a trusted financial system: the current implementation is explicitly a local simulation.
+- Test-mode SMS credentials do not represent production SMS delivery.
+
+See [`SECURITY.md`](SECURITY.md) for the repository security policy.
+
+---
+
+## Known Limitations
+
+This project intentionally stops short of production infrastructure:
+
+- No real payment gateway.
+- No real SMS delivery.
+- No technician-facing application/role.
+- Technician tracking is a simulated state lifecycle rather than real-time technician GPS.
+- No production load testing or enterprise hardening claim.
+- The demo recording is hosted outside the repository because the source video exceeds GitHub's normal single-file size limit.
+
+These limitations are part of the project's scope rather than hidden implementation gaps.
+
+---
+
+## Engineering Highlights
+
+Anaaya Plus demonstrates:
+
+- Feature-oriented Flutter architecture.
+- Repository/data abstraction.
+- Riverpod state management.
+- Declarative routing with go_router.
+- Custom authentication flow using OTP → Firebase Custom Token.
+- Server-side OTP security controls.
+- Firestore authorization rules.
+- Transaction-based scheduling/slot claiming.
+- Push notification integration.
+- Arabic RTL + English LTR localization.
+- Automated unit, repository, widget, and backend tests.
+- CI quality gates through GitHub Actions.
+- Architecture documentation and ADRs.
+
+---
+
+## Documentation
+
+- [Architecture](docs/architecture/ARCHITECTURE.md)
+- [Architecture Decision Record](docs/adr/0001-flutter-firebase-supabase.md)
+- [Testing Strategy](docs/testing/TESTING.md)
+- [Portfolio Documentation](docs/portfolio/README.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Changelog](CHANGELOG.md)
+
+---
+
+## License
+
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE).
+
+---
 
 ## Author
 
